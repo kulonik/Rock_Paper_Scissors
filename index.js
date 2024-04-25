@@ -1,39 +1,48 @@
-const choiceArr = ['Rock', 'Paper', 'Scissors'];
-const compChoice = choiceArr[Math.floor(Math.random() * 3)];
-const playerSelection = "Rock";
+const choiceArr = ['rock', 'paper', 'scissors'];
 const looser = "You lose!";
 const winner = "You win!";
 
 
-function getComputerChoice() {
-    return compChoice;
+function getComputerChoice(compChoice) {
+    return compChoice = choiceArr[Math.floor(Math.random() * 3)];;
 }
-console.log(getComputerChoice());
+
+function getHumanChoice() {
+    let sign = prompt("Rock, paper or scissors?", "");
+    return sign.toLowerCase();
+}
 
 let computerScore = 0;
-let playerScore = 0;
+let humanScore = 0;
 
-function playRound(playerSelection, computerSelection) {
-    if(playerSelection === choiceArr[0]) {
-        if(computerSelection === choiceArr[1]) {
+function playRound(humanChoice, computerChoice) {
+    
+    if(humanChoice === choiceArr[0]) {
+        if(computerChoice === choiceArr[1]) {
+            computerScore++;
             return `${looser} Paper beats Rock!`;
-        } else if (computerSelection === choiceArr[2]) {
+        } else if (computerChoice === choiceArr[2]) {
+            humanScore++;
             return `${winner} Rock beats Scissors!`;
         } else {
             return "Draw";
         }
-    } else if (playerSelection === choiceArr[1]) {
-        if (computerSelection === choiceArr[0]) {
+    } else if (humanChoice === choiceArr[1]) {
+        if (computerChoice === choiceArr[0]) {
+            humanScore++;
             return `${winner} Paper beats Rock!`;
-        } else if (computerSelection === choiceArr[2]) {
+        } else if (computerChoice === choiceArr[2]) {
+            computerScore++;
             return `${looser} Scissors beat Paper!`;
         } else {
             return "Draw";
         }
-    } else if (playerSelection === choiceArr[2]) {
-        if (computerSelection === choiceArr[0]) {
+    } else if (humanChoice === choiceArr[2]) {
+        if (computerChoice === choiceArr[0]) {
+            computerScore++;
             return `${looser} Rock beats Scissors!`;
-        } else if (computerSelection === choiceArr[1]) {
+        } else if (computerChoice === choiceArr[1]) {
+            humanScore++;
             return `${winner} Scissors beat Paper!`;
         } else {
             return "Draw";
@@ -41,16 +50,21 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// const computerSelection = getComputerChoice();
-//console.log(getComputerChoice());
-console.log(playRound(playerSelection, compChoice))
-// console.log(playRound(playerSelection, getComputerChoice()));
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
-/*function playGame(computerScore, playerScore) {
-    if()
-}
-playGame();
-playGame();
-playGame();
-playGame();
-*/
+console.log(playRound(humanSelection, computerSelection));
+
+
+
+function playGame() {
+    if(computerScore < playerScore) {
+        return "You are a winner!";
+    } else if (computerScore > playerScore) {
+        return "You are a looser!";
+    } else {
+        return "You are tie!";
+    }
+};
+
+console.log(playGame());
