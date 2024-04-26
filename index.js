@@ -2,7 +2,6 @@ const choiceArr = ['rock', 'paper', 'scissors'];
 const looser = "You lose!";
 const winner = "You win!";
 
-
 function getComputerChoice(compChoice) {
     return compChoice = choiceArr[Math.floor(Math.random() * 3)];;
 }
@@ -11,9 +10,6 @@ function getHumanChoice() {
     let sign = prompt("Rock, paper or scissors?", "");
     return sign.toLowerCase();
 }
-
-let computerScore = 0;
-let humanScore = 0;
 
 function playRound(humanChoice, computerChoice) {
     
@@ -48,19 +44,27 @@ function playRound(humanChoice, computerChoice) {
             return "Draw";
         }
     }
-}
+};
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-console.log(playRound(humanSelection, computerSelection));
-
+    let computerScore = 0;
+    let humanScore = 0;
 
 
 function playGame() {
-    if(computerScore < playerScore) {
+
+    for(let i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        console.log(humanSelection);
+        const computerSelection = getComputerChoice();
+        console.log(computerSelection);
+        playRound(humanSelection, computerSelection);
+        console.log(playRound(humanSelection, computerSelection));
+    }
+
+
+    if(computerScore < humanScore) {
         return "You are a winner!";
-    } else if (computerScore > playerScore) {
+    } else if (computerScore > humanScore) {
         return "You are a looser!";
     } else {
         return "You are tie!";
