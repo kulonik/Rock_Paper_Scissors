@@ -4,12 +4,14 @@ const scissorsButton = document.getElementById('scissors');
 const resultDisplay = document.getElementById('result');
 const humanScoreDisplay = document.getElementById('player-score');
 const computerScoreDisplay = document.getElementById('computer-score');
+const roundDisplay = document.getElementById('round');
 const looser = "You lose!";
 const winner = "You win!";
 
 let computerScore = 0;
 let humanScore = 0;
-let humanChoice;
+let currentRound = 1;
+const totalRounds = 5;
 
 rockButton.addEventListener('click', () => playRound('rock'));
 paperButton.addEventListener('click', () => playRound('paper'));
@@ -20,6 +22,7 @@ function playRound(humanChoice) {
 const choiceArr = ['rock', 'paper', 'scissors'];
 let computerChoice = choiceArr[Math.floor(Math.random() * 3)];  
 
+    if (currentRound <= totalRounds) {
     if(humanChoice === 'rock') {
         if(computerChoice === 'paper') {
             computerScore++;
@@ -72,24 +75,27 @@ let computerChoice = choiceArr[Math.floor(Math.random() * 3)];
     console.log(`Computer Score: ${computerScore}`);
     humanScoreDisplay.textContent = `Player Score: ${humanScore}`;
     computerScoreDisplay.textContent = `Computer Score: ${computerScore}`;
-};
-console.log(playRound(humanChoice));
-/*
-
-function playGame() {
-    for(let i = 0; i < 5; i++) {
-       // const humanSelection = getHumanChoice();
-        const computerSelection = computerChoice;
-        // playRound(humanSelection, computerSelection);
-        playRound(computerSelection);
+    roundDisplay.textContent = `Round: ${currentRound} of ${totalRounds}`;
+    currentRound++;
     }
+
+    if (currentRound > totalRounds) {
+        concludeGame();
+    }
+
+};
+
+
+function concludeGame() {
+    let finalResult = '';
 
     if(computerScore < humanScore) {
-        return "You are a winner!";
+       finalResult = "You are a winner!";
     } else if (computerScore > humanScore) {
-        return "You are a looser!";
+        finalResult = "You are a looser!";
     } else {
-        return "You are tie!";
+        finalResult = "You are tie!";
     }
+
+    resultDisplay.textContent = finalResult;
 };
-*/
