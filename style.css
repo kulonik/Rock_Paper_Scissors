@@ -52,3 +52,13 @@ body {
 #computer-score {
   margin: 10px;
 }
+
+#game-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#round {
+  font-size: 20px;
+  margin: 10px 0;
+}
