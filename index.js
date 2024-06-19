@@ -98,4 +98,71 @@ function concludeGame() {
     }
 
     resultDisplay.textContent = finalResult;
+    
+    const gameContainer = document.getElementById('rps-game');
+
+    const choices = document.getElementById('choices');
+    const gameInfo = document.getElementById('game-info');
+    const roundRes = document.getElementById('result');
+    if(choices) {
+        choices.style.display = 'none';
+    } if(gameInfo) {
+        gameInfo.style.display = 'none';
+    } if( roundRes) {
+        roundRes.style.display = 'none';
+    }
+
+    const gameConclusion = document.createElement('div');
+    gameConclusion.setAttribute('id', 'game-conclusion');
+
+    let finalMessage = '';
+    if(humanScore > computerScore) {
+        finalMessage = 'Congratulations, you won the game!';
+    } else if (humanScore < computerScore) {
+        finalMessage = 'Game over, the computer wins!';
+    } else {
+        finalMessage = 'The game ends in a draw!';
+    }
+
+    gameConclusion.innerHTML = `
+    <h2>Game Over</h2>
+    <p>${finalMessage}</p>
+    <p>Final Score - You: ${humanScore} | Computer: ${computerScore}</p>
+    <button id="restart-btn">Restart Game</button>
+    `;
+
+    gameContainer.appendChild(gameConclusion);
+
+    document.getElementById('restart-btn').addEventListener('click', restartGame);
 };
+
+function restartGame() {
+    humanScore = 0;
+    computerScore = 0;
+    currentRound = 0;
+
+    humanScoreDisplay.textContent = 'Player Score: 0';
+    computerScoreDisplay.textContent = 'Computer Score: 0';
+    roundDisplay.textContent = `Round: 1 of ${totalRounds}`;
+
+    const choices = document.getElementById('choices');
+    const gameInfo = document.getElementById('game-info');
+    const roundRes = document.getElementById('result');
+
+    if(choices) {
+        choices.style.display = '';
+    }
+    if (gameInfo) {
+        gameInfo.style.display = '';
+    } if (roundRes) {
+        roundRes.style.display = '';
+    }
+
+    const gameConclusion = document.getElementById('game-conclusion');
+    if(gameConclusion) {
+        gameConclusion.remove();
+    }
+
+    document.getElementById('choices').style.display = '';
+    resultDisplay.textContent = 'Choose your weapon!';
+}
